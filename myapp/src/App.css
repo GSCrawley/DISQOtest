@@ -1,38 +1,21 @@
-.App {
-  text-align: center;
-}
+/* Color Legend:
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+- Blue: #39ACDC
+- Red: #EC3646
+- Green: #57B93E
+- Text and Input Color: #333
+- Placeholder Color: #AAA
+- Border Color: #CCC
+- Body Background Color: #EEE
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+Fonts:
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+- Family: Arial
+- Main title: 24px
+- Input Label: 12px
+- "My Notes" header: 18px - All buttons: 14px
 
-.App-link {
-  color: #61dafb;
-}
+Page is responsive:
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+- Max size is 1024 pixels
+- Minimum size is 320 pixels width */
