@@ -1,0 +1,86 @@
+/* .Notepad {
+    margin: 20px;
+  }
+  
+  .add-note {
+    background-color: #57b93e;
+    color: white;
+    padding: 0;
+    border: 1px solid green;
+    border-radius: 5px;
+    height: 40px;
+    width: 80px;
+    text-align: center;
+  }
+  
+  .my-note-title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 12px;
+  }
+  
+  .padTitle {
+    width: 25%;
+    height: 30px;
+    font-size: 15px;
+  } 
+  
+  .note {
+    width: 50%;
+    height: 100px;
+    resize: none;
+    font-size: 15px;
+  }
+  
+  @media screen and (max-width:1024px) {
+    .padTitle {
+      width: 100%;
+      height: 30px;
+    }
+  
+    .note {
+      width: 100%;
+    }
+  } */
+
+  .add-form {
+    margin-bottom: 40px;
+  }
+  .form-control {
+    margin: 20px 0;
+  }
+  .form-control label {
+    display: block;
+  }
+  .form-control input {
+    width: 100%;
+    height: 40px;
+    margin: 5px;
+    padding: 3px 7px;
+    font-size: 17px;
+  }
+  .form-control input:focus {
+    outline: 0;
+  }
+  .btn {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: inherit;
+  }
+  .btn:focus {
+    outline: none;
+    color: white;
+  }
+  .btn-block {
+    display: block;
+    width: 100%;
+  }
+  
