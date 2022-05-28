@@ -19,19 +19,9 @@
     font-size: 12px;
   }
   
-  .padTitle {
-    width: 25%;
-    height: 30px;
-    font-size: 15px;
-  } 
+
   
-  .note {
-    width: 50%;
-    height: 100px;
-    resize: none;
-    font-size: 15px;
-  }
-  
+
   @media screen and (max-width:1024px) {
     .padTitle {
       width: 100%;
@@ -43,8 +33,15 @@
     }
   } */
 
+  .padTitle {
+    width: 25%;
+    height: 30px;
+    font-size: 15px;
+  } 
   .add-form {
-    margin-bottom: 40px;
+    background-color: #fff;
+    padding: 40px;
+    padding-left: 20px;
   }
   .form-control {
     margin: 20px 0;
@@ -53,18 +50,20 @@
     display: block;
   }
   .form-control input {
-    width: 100%;
+    max-width: 255ch;
+    
     height: 40px;
     margin: 5px;
     padding: 3px 7px;
     font-size: 17px;
+    background-color: #eee;
   }
   .form-control input:focus {
     outline: 0;
   }
   .btn {
-    display: inline-block;
-    background: #000;
+    display:flex;
+    background: #57B93E;
     color: #fff;
     border: none;
     padding: 10px 20px;

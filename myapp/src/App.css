@@ -20,13 +20,22 @@ Page is responsive:
 - Max size is 1024 pixels
 - Minimum size is 320 pixels width */
 
+@media (min-width: 320px) and (max-width: 1024px) {
+
+    .root {
+        background-color: #eee;
+    }
+}
 
 .container {
     background-color: #eee;
     font-family: Arial;
 }
 
+
+
 .main-title {
     font-size: 24px;
+    margin: 10px;
     padding: 20px;
 }

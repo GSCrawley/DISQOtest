@@ -1,32 +1,36 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+// import gist from "simple-github-gist-api";
+import { githubGist } from "../GistAPI";
 import "./Notepad.css";
 
 
 const Notepad = ({onSave}) => {
-  const [text, setText] = useState('');
-  const [deleteFn, setDeleteFn] = useState('');
+  const [mainTitle, setMainTitle] = useState('');
+  const [noteTitle, setNoteTitle] = useState('');
+  const [noteText, setNoteText] = useState('')
   const onSubmit = (e) => {
-    // e.preventDefault();
-    // if (!text) {
-
-    // } else {
-    onSave({text});
+   
+    onSave({mainTitle, noteTitle, noteText});
   
-    setText('');
+    setMainTitle('');
+    setNoteTitle('');
+    setNoteText('');
   }
     return (
       <>
       <form className="add-form" onSubmit={onSubmit}>
-        <p className="padTitle">Notepad title</p>
+        <p className="padTitle">Notepad Title</p>
 
         <div className="form-control">
           <input
+            className="mainTitle"
             type="text"
             placeholder="My notepad title..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+            value={mainTitle}
+            onChange={(e) => setMainTitle(e.target.value)}
+            {...console.log(mainTitle)}
+
           />
         <div className="buttons">
           <Link to="/stats">
@@ -34,37 +38,52 @@ const Notepad = ({onSave}) => {
               View Stats
               </button>
           </Link>
-          <button className="saveBtn" onClick={() => setText}>
+          <button className="saveBtn" onClick={() => setMainTitle}>
             Save
             </button>
-          <button className="deleteBtn" value={deleteFn} onClick={() => setDeleteFn}>
+            
+          {/* <button className="deleteBtn" value={deleteFn} onClick={() => setDeleteFn}>
             Delete
-          </button>
+          </button>  */}
         
         <p className="myNotesHeading">My Notes</p>
         <div className="noteTitleField">
           <input
             type="text"
             placeholder="Enter note title..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+            value={noteTitle}
+            onChange={(e) => setNoteTitle(e.target.value)}
+            {...console.log(noteTitle)}
           />
         <div className="noteField">
           <input
             type="text"
             placeholder="Enter note..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+            value={noteText}
+            onChange={(e) => setNoteText(e.target.value)}
+            {...console.log(noteText)}
           />
       </div>
       </div>
       </div>
       </div>
-      <input type="submit" className="btn btn-block" value="Save Task"/>
+      <button type="submit" className="btn btn-block" value="Save Task" onClick={() => githubGist.save()}>
+      Add
+      </button>
     </form>
+    <div className="padTitle">
+      Main Title: { mainTitle }
+    </div>
+    <div className="noteTitle">
+      Note Title: { noteTitle }
+    </div>
+    <div className="Note">
+      Note: { noteText }
+    </div>
     </>
   );
-};
+        }
+  
 
-    
+
 export default Notepad
