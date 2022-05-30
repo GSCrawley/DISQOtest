@@ -1,20 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from "./App";
-import {loadState, saveState } from './local_storage';
-import { createStore } from 'redux'
 
 
-const persistedState = loadState();
-const store = createStore(rootReducer, persistedState);
-store.subscribe(() => {
-  saveState(store.getState());
-})
+const container =  document.getElementById("root")
+const root = createRoot(container); 
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-  
-);
+   root.render( <App />)

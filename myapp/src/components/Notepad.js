@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 // import gist from "simple-github-gist-api";
 import { githubGist } from "../GistAPI";
+// import { AddNote } from "../containers"
 import "./Notepad.css";
 
 
@@ -71,15 +72,8 @@ const Notepad = ({onSave}) => {
       Add
       </button>
     </form>
-    <div className="padTitle">
-      Main Title: { mainTitle }
-    </div>
-    <div className="noteTitle">
-      Note Title: { noteTitle }
-    </div>
-    <div className="Note">
-      Note: { noteText }
-    </div>
+
+    
     </>
   );
         }
