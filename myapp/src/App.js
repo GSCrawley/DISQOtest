@@ -19,7 +19,8 @@ const store = configureStore({
 })
 
 store.subscribe(() => {
-  saveState(store.getState());
+  saveState({
+      store.getState());
 })
 
 const App = () => {

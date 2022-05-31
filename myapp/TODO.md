@@ -13,9 +13,11 @@
 
 ### = right now same gist is being updated when a new form is saved. need to create a new gist for each new notepad, which should update with each new note within the notepad. 
 
-### (access token should be placed in the header of all the requests that are sent to the gists API like so:
+### access token should be placed in the header of all the requests that are sent to the gists API like so:
 ### {
-### Authorization: token [[ ENTER YOUR TOKEN HERE ]] )
+### Authorization: token [[ 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 ]] )
 ### }
 
 ### using 'gist-charts', make gist data chart for notepad and one for notes in notepad, to be accessed with 'stats' button
+
+### fix styling 
