@@ -1,17 +1,23 @@
 import "./App.css";
-import { React } from 'react'
+import React from 'react'
 import Notepad from "./components/Notepad";
 // import NotesList from "./components/NotesList";
 import {loadState, saveState } from './local_storage';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from './reducers'
 
 
 // import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const persistedState = loadState();
-const store = createStore(rootReducer, persistedState);
+const store = configureStore({
+    persistedState,
+    reducer: {
+        rootReducer
+    }
+})
+
 store.subscribe(() => {
   saveState(store.getState());
 })

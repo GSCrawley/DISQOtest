@@ -1,8 +1,6 @@
-import { React, useState } from "react";
-import { Link } from "react-router-dom";
-// import gist from "simple-github-gist-api";
+import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
 import { githubGist } from "../GistAPI";
-// import { AddNote } from "../containers"
 import "./Notepad.css";
 
 
@@ -21,8 +19,8 @@ const Notepad = ({onSave}) => {
     return (
       <>
       <form className="add-form" onSubmit={onSubmit}>
-        <p className="padTitle">Notepad Title</p>
-
+        <p className="padTitle">{mainTitle}</p>
+        
         <div className="form-control">
           <input
             className="mainTitle"
@@ -34,11 +32,11 @@ const Notepad = ({onSave}) => {
 
           />
         <div className="buttons">
-          <Link to="/stats">
+          {/* <Link to="/stats"> */}
             <button className="statsBtn">
               View Stats
               </button>
-          </Link>
+          {/* </Link> */}
           <button className="saveBtn" onClick={() => setMainTitle}>
             Save
             </button>

@@ -1,11 +1,11 @@
 import GithubGist from "simple-github-gist-api";
 
-const token = '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';
+const token = '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';
 
 export const githubGist = new GithubGist({
-    appIdentifier: 'DISQOTest',
+    appIdentifier: 'DISQO_Test',
     personalAccessToken: token,
-    isPublic: false,
+    isPublic: true,
     cors: {
       addPrefix: true,
       // customPrefix: (someURl) => `YourCustomPrefix` + someURl,
