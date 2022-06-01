@@ -1,21 +1,57 @@
 import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-import { githubGist } from "../GistAPI";
+import { Link } from 'react-router-dom';
+import { Octokit } from '@octokit/core'
+// import { githubGist, token } from "../GistAPI";
+import NewNote from './NewNote'
 import "./Notepad.css";
 
+const token = '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'
 
-const Notepad = ({onSave}) => {
+const octokit = new Octokit({
+  auth: token
+})
+
+const Notepad = () => {
   const [mainTitle, setMainTitle] = useState('');
   const [noteTitle, setNoteTitle] = useState('');
   const [noteText, setNoteText] = useState('')
+  const [deleteFn, setDeleteFn] = useState('')
+  const [list, setList] = useState([]);
+  const [locStor, setLocStor] = useState(localStorage);
+
+  const createNotepad = () => {
+    octokit.request('POST /gists', {mainTitle})
+    console.log('create notepad!', mainTitle)
+  }
+
+  const createNote = () => {
+    octokit.request('PATCH /gists/{gist_id}', {
+      gist_id: NewNote
+    })
+  }
+
   const onSubmit = (e) => {
-   
-    onSave({mainTitle, noteTitle, noteText});
+    e.preventDefault();
+    
   
     setMainTitle('');
     setNoteTitle('');
     setNoteText('');
+    setDeleteFn('');
+    setList((e) => {
+      return [...e, NewNote];
+    
+    });
+    setLocStor({title: mainTitle, list: list});
+    // locStor = localStorage
+    locStor.setItem(
+      token,
+      JSON.stringify({list})
+    );
+    locStor.getItem(token);
+    
   }
+
     return (
       <>
       <form className="add-form" onSubmit={onSubmit}>
@@ -28,22 +64,22 @@ const Notepad = ({onSave}) => {
             placeholder="My notepad title..."
             value={mainTitle}
             onChange={(e) => setMainTitle(e.target.value)}
-            {...console.log(mainTitle)}
+            maxLength="255"
 
           />
         <div className="buttons">
-          {/* <Link to="/stats"> */}
+          <Link to="/stats">
             <button className="statsBtn">
               View Stats
               </button>
-          {/* </Link> */}
-          <button className="saveBtn" onClick={() => setMainTitle}>
+          </Link>
+          <button className="saveBtn" onClick={createNotepad}>
             Save
             </button>
             
-          {/* <button className="deleteBtn" value={deleteFn} onClick={() => setDeleteFn}>
+          <button className="deleteBtn" value={deleteFn} onClick={() => setDeleteFn}>
             Delete
-          </button>  */}
+          </button> 
         
         <p className="myNotesHeading">My Notes</p>
         <div className="noteTitleField">
@@ -52,25 +88,30 @@ const Notepad = ({onSave}) => {
             placeholder="Enter note title..."
             value={noteTitle}
             onChange={(e) => setNoteTitle(e.target.value)}
-            {...console.log(noteTitle)}
+            maxLength="255"
           />
         <div className="noteField">
-          <input
+          <textarea
             type="text"
+            id="note"
             placeholder="Enter note..."
             value={noteText}
             onChange={(e) => setNoteText(e.target.value)}
-            {...console.log(noteText)}
-          />
+            rows="10"
+            cols="50"
+            maxLength="1000"
+          ></textarea>
       </div>
       </div>
       </div>
       </div>
-      <button type="submit" className="btn btn-block" value="Save Task" onClick={() => githubGist.save()}>
+      <button type="submit" className="btn btn-block" value="Save Task" onClick={createNote}>
       Add
       </button>
     </form>
-
+      <div className="notesList">
+        list
+      </div>
     
     </>
   );
