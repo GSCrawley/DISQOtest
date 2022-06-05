@@ -1,5 +1,5 @@
 import "./App.css";
-import React from 'react'
+import React, { useState } from 'react'
 import Notepad from "./components/Notepad";
 // import Stats from './components/Stats'
 // import NotesList from "./components/NotesList";
@@ -7,6 +7,7 @@ import { loadState, saveState } from './local_storage';
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { rootReducer } from './reducers'
+import { listAll } from './GistAPI'
 
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -22,18 +23,30 @@ const store = configureStore({
 store.subscribe(() => {
   saveState({
       Notepad: store.getState().Notepad
-});
-});
+    });
+})
 
 function App() {
+  const [data, setData] = useState([])
     return (
         <Provider store={store}>
             <div className="container">
                 <p className="main-title">Notepad application</p>
+                <button 
+                className="listAll"
+                onClick={async() => {
+                  const gistData = await listAll()
+                  setData(gistData.data)
+                }}
+                >List All</button>
+                <ul>
+                  {data.map(gist => <li key={gist.id}>{gist.description}</li>)}
+                </ul>
                 <BrowserRouter>
                 <Routes>
                    
                     <Route path="/" element = {<Notepad/>}/>
+
                 </Routes>
                 </BrowserRouter>
             </div>
@@ -56,4 +69,12 @@ export default App;
 // GET https://api.github.com/rate_limit 401
 // DISPLAY NOTES IN GIST
 // CREATE CHARTS FROM GIST DATA - ONE FOR NOTEPAD DATA, ONE FOR NOTES IN NOTEPADS (notepad = gist, notes = files in gist)
-// FIX STYLING
+// FIX STYLING 
+
+// make a component that lists all the gists
+// write the function, 
+//export the function, 
+// set up tester button, 
+// call function and console log the results. 
+// set up 'try/catch block
+// gistAPI functions need to be async / await 

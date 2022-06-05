@@ -1,45 +1,143 @@
-// import GithubGist from "simple-github-gist-api";
+import { Octokit } from "@octokit/rest"
 
-// export const token = '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';
+const token = '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'
 
-// export const githubGist = new GithubGist({
-//     appIdentifier: 'DISQO_Test',
-//     personalAccessToken: token,
-//     isPublic: true,
-//     cors: {
-//       addPrefix: true,
-//       // customPrefix: (someURl) => `YourCustomPrefix` + someURl,
-//     },
-// });
+export const octokit = new Octokit({
+  auth: token, 
+  userAgent: 'DISQO test'
+});
 
-// (async () => {
-//     await githubGist.touch();
-  
-//     console.log("Gist ID", githubGist.id);
-//     console.log("Github Username", githubGist.ownerUsername);
-  
-//     console.log("Original File names", githubGist.getFileNames());
-  
-//     const created = githubGist.createFile("projects.json", "{}");
-//     if (created) {
-//       console.log('Created new file in gist');
-//     } else {
-//       console.log('Updated existing file in gist');
-//     }
-  
-//     // Note: All the creates and updates happen in-memory. You have to
-//     // explicitly invoke the `save` method on either the entire gist instance
-//     // or the individual file instance.
-  
-//     // Saves all the files in the gist. Only the un-saved changes will be
-//     // added to the payload.
-//     await githubGist.save();
-  
-//     // Save individual file.
-//     // const file = githubGist.getFile('projects.json');
-//     // await file.save();
-  
-//     console.log("File names", githubGist.getFileNames());
-//   })();
+//Create gist
 
-  //compare this code w/documentation (simple-gist-api)
+export const createNotePad = async(gist_id) => {
+  try {
+    let data = await octokit.request(
+      'POST /gists', {gist_id}); 
+    console.log(data)
+    return data
+  } catch(error) {
+    console.log(error)
+  }
+};
+
+export const createNote = async(gist_id, body) => {
+  try {
+    let data = await octokit.request(
+      'POST /gists/{gist_id}/comments', {
+        gist_id,
+        body
+      });
+      console.log(data)
+      return data
+    } catch(error) {
+      console.log(error)
+    }
+};
+//Update gist
+
+export const updateNotePad = async(gist_id) => {
+  try {
+    let data = await octokit.request(
+      'PATCH /gists/{gist_id}', {
+        gist_id
+      });
+    console.log(data)
+    return data
+    } catch(error) {
+    console.log(error)
+    }
+};
+
+
+export const updateNote = async(gist_id, comment_id, body) => {
+  try {
+    let data = await octokit.request(
+      'PATCH /gists/{gist_id}/comments/{comment_id}', {
+        gist_id,
+        comment_id,
+        body
+      })
+      console.log(data)
+      return data
+    } catch(error) {
+      console.log(error)
+    }
+};
+
+
+export const deleteNotePad = async(gist_id) => {
+  try {
+    let data = await octokit.request(
+      'DELETE /gists/{gist_id}', {
+    gist_id
+  })
+  console.log(data)
+  return data
+} catch(error) {
+  console.log(error)
+}
+}
+
+
+export const deleteNote = async(gist_id, comment_id) => {
+  try {
+    let data = await octokit.request(
+      'DELETE /gists/{gist_id}/comments/{comment_id}', {
+    gist_id,
+    comment_id
+  });
+  console.log(data)
+  return data
+} catch(error) {
+  console.log(error)
+}
+}
+
+
+
+//exporting function, asynchronous(it returns a promise - when we resolve the function we need to resolve it as though its returning a function.)
+//arrow function - takes one parameter. 
+//await waits for the promise in async before executing
+//Retrieve gist file
+
+export const getNotePad = async (gist_id) => {
+  try {
+    let data = await octokit.request('GET /gists/public', {
+      gist_id
+    });
+    console.log(data)
+    return data
+    } catch(error) {
+    console.log(error)
+    }
+}
+
+
+//list all notepads
+export const listAll = async (gist_id, comment_id) => {
+  try {
+    let data = await octokit.request(
+      'POST /gists/{gist_id}/comments/{comment_id}', {
+      gist_id,
+      comment_id
+    })
+    console.log(data)
+    return data
+  } catch(error) {
+    console.log(error)
+  }
+}
+
+export const getNote = async(gist_id, comment_id) => {
+  try {
+    let data = await octokit.request(
+    'GET /gists/{gist_id}/comments/{comment_id}', {
+    gist_id,
+    comment_id
+  })
+  console.log(data)
+  return data
+} catch(error) {
+  console.log(error)
+}
+}

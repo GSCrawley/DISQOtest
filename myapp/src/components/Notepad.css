@@ -1,85 +1,154 @@
-/* .Notepad {
-    margin: 20px;
-  }
-  
-  .add-note {
-    background-color: #57b93e;
-    color: white;
-    padding: 0;
-    border: 1px solid green;
-    border-radius: 5px;
-    height: 40px;
-    width: 80px;
-    text-align: center;
-  }
-  
-  .my-note-title {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 12px;
-  }
-  
+button {
+  font-size: 14px;
+}
 
-  
+.DemoTitle {
+  font-size: 24px;
+  color: #333;
+}
 
-  @media screen and (max-width:1024px) {
-    .padTitle {
-      width: 100%;
-      height: 30px;
-    }
-  
-    .note {
-      width: 100%;
-    }
-  } */
+.Notepad {
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  .padTitle {
-    width: 25%;
-    height: 30px;
-    font-size: 15px;
-  } 
-  .add-form {
-    background-color: #fff;
-    padding: 40px;
-    padding-left: 20px;
-  }
-  .form-control {
-    margin: 20px 0;
-  }
-  .form-control label {
+/* Note Title.js */
+
+.notePadTitle input {
+  margin-top: 5px;
+  width: 80%;
+}
+
+.notePadTitle label {
+  font-size: 12px;
+}
+
+.notePadTitle .notePadTitleInput {
+  width: 50%;
+  float: left;
+  display: flex;
+}
+
+.notePadTitle .noteTitleBtnGroup button {
+  padding: 5px;
+}
+
+.notePadTitle .noteTitleBtnGroup button {
+  border: none;
+  border-radius: 5px;
+  margin: 1px;
+  color: white;
+}
+
+.notePadTitle .noteTitleBtnGroup button:first-child {
+  background-color: #39acdc;
+}
+
+.notePadTitle .noteTitleBtnGroup button:last-child {
+  background-color: #ec3646;
+}
+
+/* Create Note.js */
+
+.createNoteForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 100%;
+}
+
+.createNoteForm::-webkit-input-placeholder {
+  font-size: 18px;
+}
+
+.createNoteForm * {
+  margin: 5px;
+  padding: 5px;
+}
+
+.createNoteForm button {
+  background-color: #57b93e;
+  border: none;
+  border-radius: 5px;
+  width: 20%;
+  color: white;
+}
+
+/* View Notes.js */
+
+.noteslist {
+  display: flex;
+  flex-direction: column;
+}
+
+.noteslist .noteItem {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  float: left;
+}
+
+.noteslist .noteItem * {
+  margin: 5px;
+  padding: 5px;
+}
+
+.noteslist .noteItemBtn {
+  width: 65%;
+}
+
+.noteslist .noteItemBtn button {
+  float: left;
+  background-color: #ec3646;
+  border: none;
+  border-radius: 5px;
+  width: 45%;
+  color: white;
+}
+
+/* responsive */
+
+@media only screen and (min-width: 720px) {
+  .noteTitle {
     display: block;
   }
-  .form-control input {
-    max-width: 255ch;
-    
-    height: 40px;
+
+  .noteTitle .noteTitleBtnGroup {
+    float: right;
     margin: 5px;
-    padding: 3px 7px;
-    font-size: 17px;
-    background-color: #eee;
+    padding: 5px;
   }
-  .form-control input:focus {
-    outline: 0;
+
+  .noteTitle .noteTitleBtnGroup button {
+    width: inherit;
   }
-  .btn {
-    display:flex;
-    background: #57B93E;
-    color: #fff;
+
+  .createNoteForm input[type="text"] {
+    width: 355px;
+  }
+
+  .createNoteForm textarea {
+    width: 355px;
+  }
+
+  .noteslist input[type="text"] {
+    width: 355px;
+  }
+
+  .noteslist textarea {
+    width: 355px;
+  }
+
+  .noteslist .noteItemBtn button {
+    float: right;
+    background-color: #ec3646;
     border: none;
-    padding: 10px 20px;
-    margin: 5px;
     border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 15px;
-    font-family: inherit;
-  }
-  .btn:focus {
-    outline: none;
+    width: 20%;
     color: white;
   }
-  .btn-block {
-    display: block;
-    width: 100%;
+
+  .noteslist .noteItemBtn {
+    width: 70%;
   }
-  
+}
