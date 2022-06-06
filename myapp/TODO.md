@@ -1,4 +1,13 @@
+# instructions state that Github Gists API is to be used, so you've been wasting your time with this Octokit thing!
+## needs to be as follows!
 
+## const docs = await fetch(`/api/likes/user?postId=${postId}&userId=${userId}`, {
+##   method: 'GET',
+##       headers: {
+##           Accept: 'application/json',
+##           'Content-Type': 'application/json',
+##       }
+## })
 ### when i click 'add file', it doesn't create a new gist on github, only updates the same gist, and the content of the note is not appearing in the gist file.
 
 ### TO DO:

@@ -1,18 +1,37 @@
 import { Octokit } from "@octokit/rest"
 
-const token = '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'
+const token = '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'
 
 export const octokit = new Octokit({
   auth: token, 
-  userAgent: 'DISQO test'
+  userAgent: 'DISQOtest v1.2.3',
+  headers: 'Accept: application/vnd.github.v3+json',
+  baseUrl: 'https://api.github.com/gists'
 });
 
-//Create gist
 
-export const createNotePad = async(gist_id) => {
+// 
+// const docs = await fetch(`/api/likes/user?postId=${postId}&userId=${userId}`, {
+//   method: 'GET',
+//       headers: {
+//           Accept: 'application/json',
+//           'Content-Type': 'application/json',
+//       }
+// })
+
+export const createNotePad = async(notes) => {
   try {
-    let data = await octokit.request(
-      'POST /gists', {gist_id}); 
+    let data = await octokit.gists.create({
+      
+      files: {
+        note: {
+          content: JSON.stringify(notes)
+        }
+      }
+    })
+    
+    // request(
+    //   'POST /gists', {gist_id}); 
     console.log(data)
     return data
   } catch(error) {
@@ -67,17 +86,15 @@ export const updateNote = async(gist_id, comment_id, body) => {
 
 export const deleteNotePad = async(gist_id) => {
   try {
-    let data = await octokit.request(
-      'DELETE /gists/{gist_id}', {
-    gist_id
-  })
+    let data = await octokit.gists.get({
+      gist_id,
+    });
   console.log(data)
   return data
 } catch(error) {
   console.log(error)
 }
 }
-
 
 export const deleteNote = async(gist_id, comment_id) => {
   try {
@@ -102,8 +119,8 @@ export const deleteNote = async(gist_id, comment_id) => {
 
 export const getNotePad = async (gist_id) => {
   try {
-    let data = await octokit.request('GET /gists/public', {
-      gist_id
+    let data = await octokit.gists.get({
+      gist_id,
     });
     console.log(data)
     return data

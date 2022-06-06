@@ -4,52 +4,70 @@ import React, { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid' // this will generate id for each new note
 
 import { createNotePad, updateNotePad, deleteNotePad, getNotePad,
-  updateNote, deleteNote, getNote } from "../GistAPI";
+  updateNote, deleteNote, getNote, octokit } from "../GistAPI";
 
 import CreateNote from './CreateNote'
 import NotePadTitle from './NotePadTitle'
 import NotesList from './NotesList';
 
+import {} from 'local-storage'
+import { loadState, saveState } from '../local_storage'
+
 import "./Notepad.css";
 
 const locStor = require('local-storage')
+const gist_id = octokit.id
 
 function Notepad() {
   const [title, setTitle] = useState('');
   const [notes, setNotes] = useState('');
 
-  const formNotes = (data) => JSON.parse((data.data.files.note.content)).notes
-  const formTitle = (data) => JSON.parse((data.data.files.note.content)).title
+  const formNotes = (data) => JSON.parse((data.files.note.content)).notes
+  const formTitle = (data) => JSON.parse((data.files.note.content)).title
   
   useEffect(() => {
-    if (locStor('gist_id')) {
+    if (locStor(gist_id)) {
       let notes = [];
       (async function getNotes() {
-        notes = await getNotePad(locStor.get('gist_id'));
-        setNotes(formNotes(notes))
-        setTitle(formTitle(notes))
+        notes = await getNotePad(locStor.get(gist_id));
+        console.log(notes)
+        // setNotes(formNotes(notes))
+        // setTitle(formTitle(notes))
       })();
     }
   },[])
   
+
   const saveNotepad = async() => {
-    if (locStor('gist_id')) {
-      const savedNotePad = await updateNotePad(locStor.get('gist_id'),{});
-     
-      locStor('gist_id', savedNotePad.data.id);
+    console.log(title, gist_id)
+    console.log(octokit)
+    const savedState = loadState()
+    if (savedState === undefined) {
+      const state = [{title, time:Date.now(), gist_id}]
+      saveState(state)
     } else {
-      const savedNotePad = await createNotePad({});
-     
-      locStor('gist_id', savedNotePad.data.id);
+      savedState.push({title, time:Date.now(), gist_id})
+      saveState(savedState)
     }
+
+
+  //   if (locStor(gist_id)) {
+  //     const savedNotePad = await updateNotePad(locStor.get(gist_id),{});
+     
+  //     locStor(gist_id, savedNotePad)
+  //   } else {
+  //     const savedNotePad = await createNotePad({});
+     
+  //     locStor(gist_id, savedNotePad);
+  //   }
   }
     
   const delNotePad = async() => {
-    if (locStor('gist_id')) {
-      const deletedNote = await deleteNotePad(locStor.get('gist_id'));
+    if (locStor(gist_id)) {
+      const deletedNote = await deleteNotePad(locStor.get(gist_id));
       console.log(deletedNote);
     }
-    locStor.remove('gist_id');
+    locStor.remove(gist_id);
     setNotes([]);
     setTitle('');
   }
