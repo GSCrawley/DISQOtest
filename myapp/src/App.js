@@ -32,16 +32,16 @@ function App() {
         <Provider store={store}>
             <div className="container">
                 <p className="main-title">Notepad application</p>
-                <button 
+                {/* <button 
                 className="listAll"
                 onClick={async() => {
                   const gistData = await listAll()
-                  setData(gistData.data)
+                  setData(gistData)
                 }}
                 >List All</button>
                 <ul>
                   {data.map(gist => <li key={gist.id}>{gist.description}</li>)}
-                </ul>
+                </ul> */}
                 <BrowserRouter>
                 <Routes>
                    

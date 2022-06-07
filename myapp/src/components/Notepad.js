@@ -16,7 +16,7 @@ import { loadState, saveState } from '../local_storage'
 import "./Notepad.css";
 
 const locStor = require('local-storage')
-const gist_id = octokit.id
+const gist_id = octokit
 
 function Notepad() {
   const [title, setTitle] = useState('');
@@ -31,15 +31,15 @@ function Notepad() {
       (async function getNotes() {
         notes = await getNotePad(locStor.get(gist_id));
         console.log(notes)
-        // setNotes(formNotes(notes))
-        // setTitle(formTitle(notes))
+        setNotes(formNotes(notes))
+        setTitle(formTitle(notes))
       })();
     }
   },[])
   
-
-  const saveNotepad = async() => {
-    console.log(title, gist_id)
+// the following saves new notepad to local storage
+  const saveNotepad = async(gist) => {
+    console.log(title)
     console.log(octokit)
     const savedState = loadState()
     if (savedState === undefined) {
@@ -78,7 +78,7 @@ function Notepad() {
       <div className="notePad">
         <NotePadTitle 
           onTitleChange={(title) => setTitle(title)} 
-          onSave={saveNotepad} 
+          onSave={(saveNotepad) (createNotePad)} 
           onDelete={delNotePad} 
           title={title} 
         />

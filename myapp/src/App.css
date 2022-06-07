@@ -30,12 +30,17 @@ Page is responsive:
 .container {
     background-color: #eee;
     font-family: Arial;
+    border: 1px solid black;
+    width: 75%;
+    
+    
 }
 
 
+   
 
 .main-title {
     font-size: 24px;
     margin: 10px;
-    padding: 20px;
+    padding: 10px;
 }

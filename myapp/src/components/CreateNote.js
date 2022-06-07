@@ -33,9 +33,9 @@ const CreateNote = ({onSave}) => {
             />
 			<button onClick={() => {
                 onSave({title, note}); 
-                clearFields(); 
                 createNote(CreateNote)
-                }}>Add</button>
+                clearFields(); 
+                 }}>Add</button>
 		</div>
 	)
 }
