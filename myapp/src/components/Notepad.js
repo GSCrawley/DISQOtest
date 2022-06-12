@@ -14,6 +14,7 @@ import {} from 'local-storage'
 import { loadState, saveState } from '../local_storage'
 
 import "./Notepad.css";
+import timeStamp from 'console';
 
 const locStor = require('local-storage')
 const gist_id = octokit
@@ -38,31 +39,24 @@ function Notepad() {
   },[])
   
 // the following saves new notepad to local storage
-  const saveNotepad = async(gist) => {
-    console.log(title)
-    console.log(octokit)
+const SaveNotepad = async(gist_id) => {
+    console.log(gist_id)
+
     const savedState = loadState()
-    if (savedState === undefined) {
-      const state = [{title, time:Date.now(), gist_id}]
+    if (savedState === undefined) {        
+      const state = [{NotePadTitle}]
       saveState(state)
+      
+      console.log(state)
     } else {
-      savedState.push({title, time:Date.now(), gist_id})
+      savedState.push({NotePadTitle})
       saveState(savedState)
+      
+      console.log(savedState)
     }
-
-
-  //   if (locStor(gist_id)) {
-  //     const savedNotePad = await updateNotePad(locStor.get(gist_id),{});
-     
-  //     locStor(gist_id, savedNotePad)
-  //   } else {
-  //     const savedNotePad = await createNotePad({});
-     
-  //     locStor(gist_id, savedNotePad);
-  //   }
   }
     
-  const delNotePad = async() => {
+const delNotePad = async() => {
     if (locStor(gist_id)) {
       const deletedNote = await deleteNotePad(locStor.get(gist_id));
       console.log(deletedNote);
@@ -78,14 +72,14 @@ function Notepad() {
       <div className="notePad">
         <NotePadTitle 
           onTitleChange={(title) => setTitle(title)} 
-          onSave={(saveNotepad) (createNotePad)} 
+          onSave={SaveNotepad} 
           onDelete={delNotePad} 
           title={title} 
         />
         <CreateNote 
           onSave={() => 
             setNotes(() => 
-            [...notes, {id: nanoid(), ...CreateNote}])} 
+            [...notes, {id: nanoid(), ...CreateNote}])}
         />
         <NotesList 
           notes={notes.id} 
@@ -94,6 +88,5 @@ function Notepad() {
         </div>
   );
         }
-
 
 export default Notepad

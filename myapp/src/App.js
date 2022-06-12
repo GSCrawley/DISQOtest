@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from 'react'
+import React from 'react'
 import Notepad from "./components/Notepad";
 // import Stats from './components/Stats'
 // import NotesList from "./components/NotesList";
@@ -7,7 +7,7 @@ import { loadState, saveState } from './local_storage';
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { rootReducer } from './reducers'
-import { listAll } from './GistAPI'
+// import { listAll } from './GistAPI'
 
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -27,21 +27,11 @@ store.subscribe(() => {
 })
 
 function App() {
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
     return (
         <Provider store={store}>
             <div className="container">
-                <p className="main-title">Notepad application</p>
-                {/* <button 
-                className="listAll"
-                onClick={async() => {
-                  const gistData = await listAll()
-                  setData(gistData)
-                }}
-                >List All</button>
-                <ul>
-                  {data.map(gist => <li key={gist.id}>{gist.description}</li>)}
-                </ul> */}
+                
                 <BrowserRouter>
                 <Routes>
                    
@@ -64,7 +54,6 @@ export default App;
 // ADD DELETE BUTTON, 
 // MAKE SAVE AND DELETE BUTTONS FUNCTIONAL
 
-// research Octokit vs simple-github-gist-api
 
 // GET https://api.github.com/rate_limit 401
 // DISPLAY NOTES IN GIST

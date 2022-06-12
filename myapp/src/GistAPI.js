@@ -1,18 +1,26 @@
 import { Octokit } from "@octokit/rest"
 
-const token = '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'
+const token = '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'
 
 export const octokit = new Octokit({
   auth: token, 
-  userAgent: 'DISQOtest v1.2.3',
-  // headers: 'Accept: application/vnd.github.v3+json',
-  // baseUrl: 'https://api.github.com/gists'
+  userAgent: 'DISQO Test',
+  headers: 'Accept: application/vnd.github.v3+json',
+  baseUrl: 'https://api.github.com/gists'
 });
 
-export const createNotePad = async(gist) => {
+export const createNotePad = async() => {
   try {
     let data = await octokit.request(
-      'POST /gists', {gist});
+      'POST /gists/{gist_id}/', {
+        description: 'Example of a gist',
+        'public': true,
+        files: {
+          'README.md': {
+            content: 'Hello World'
+          }
+        }
+      });
     console.log(data)
     return data
   } catch(error) {
